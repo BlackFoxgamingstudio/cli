@@ -5,11 +5,10 @@ __pycache__/
 *.pyd
 .env
 venv/
-.env*
+.venv/
+node_modules/
 .DS_Store
-# Build artifacts
 build/
 /dist/
 *.egg-info/
-# Large data / model caches (already ignored globally)
 **/data/**
