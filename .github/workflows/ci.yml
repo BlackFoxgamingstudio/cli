@@ -1,0 +1,76 @@
+name: CI
+on:
+  push:
+    paths:
+      - '**/*'
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  packages: write
+  security-events: write
+  id-token: write
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dev tools
+        run: pip install ruff mypy
+      - name: Run linters
+        run: |
+          ruff check . || true
+          ruff format --check . || true
+          mypy . || true
+
+  test:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install deps
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if [ -f package.json ]; then npm ci; fi
+      - name: Run tests
+        run: |
+          if [ -f pytest.ini ]; then pytest --json-report || true; fi
+          if [ -f jest.config.js ]; then npm test -- --json || true; fi
+      - name: Upload coverage
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${ secrets.CODECOV_TOKEN }
+
+  sast:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: CodeQL init
+        uses: github/codeql-action/init@v3
+        with:
+          languages: python, javascript, swift
+      - name: CodeQL analysis
+        uses: github/codeql-action/analyze@v3
+
+  sbom:
+    needs: sast
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate SBOM (CycloneDX)
+        uses: Anchore/sbom-action@v0
+        with:
+          format: cyclonedx-json
+          output-file: sbom.cdx.json
+      - name: Upload SBOM
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom
+          path: sbom.cdx.json

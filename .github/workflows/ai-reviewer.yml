@@ -1,0 +1,17 @@
+name: AI PR Reviewer
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: AI Review Placeholder
+        run: echo "This workflow acts as an integration point for CodeRabbit, Sweep, or a custom LLM review agent."

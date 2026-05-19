@@ -1,0 +1,19 @@
+name: Deploy
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+  packages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy Placeholder
+        run: echo "Deploying ${GITHUB_REPOSITORY} to production environment"
+      - name: Notify
+        run: echo "Deployment notification sent."

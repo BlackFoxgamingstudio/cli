@@ -1,0 +1,101 @@
+# OS / Editor / IDE
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+env/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Node / JavaScript
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnp.*
+
+# Swift / Xcode
+DerivedData/
+*.xcworkspace
+*.xcodeproj/
+*.plist
+
+# Docker
+*.tar
+docker-compose.override.yml
+
+# Secrets / Credentials
+*.pem
+*.key
+.env
+.env.*
+
+# LLM artefacts
+*.gguf
+*.bin
+*.db
+*.sqlite
+
+# GitHub Actions artefacts
+.github/workflows/*.log
+
+# Media & Heavy Binary Assets (SBB Prevention)
+*.mp4
+*.mov
+*.aif
+*.aifc
+*.pdf
+*.zip
+*.tar.gz
+*.dmg
+*.pkg
+*.mp3
+*.wav
+*.avi
+*.mkv
+*.safetensors
+*.gguf
+*.bin
+original_source/48acres/
+**/data/backups/
+**/data/cache/
+**/data/chroma/
+**/data/chroma_db/
+**/data/redis/
+**/data/uploads/
+**/data/webui/
+**/data/n8n/
+**/data/training-data/
+**/data/qa_screenshots/
+**/data/qa_reports/
+**/data/qa_reference/
+**/data/sop_pages/
+**/data/evidence/
+**/data/extracted_docs/
+**/data/build_evidence/
+**/data/logs/
+**/chrome-profile/
+**/logs/
+**/workspace/
+**/workspaces/
+**/generated/
+**/test-results/
+**/playwright-report/
+*.onnx
+*.pkl
+*.pt
+*.pth
+chrome-profile/
+logs/
+workspace/
+workspaces/
+generated/
+test-results/
+playwright-report/

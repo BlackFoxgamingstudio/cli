@@ -1,0 +1,11 @@
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.svg binary
+*.pdf binary
+*.zip binary
+
+# Linguist language overrides (example)
+*.py linguist-language=Python
+*.js linguist-language=JavaScript
+*.swift linguist-language=Swift
